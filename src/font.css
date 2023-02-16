@@ -1,0 +1,14 @@
+@font-face {
+    font-family: 'D-din';
+    src: url('./font/D-DIN.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    }
+
+ h1,h2,h3,h4,h5 {
+    font-family: 'D-din', sans-serif;
+ }
+
+ p,a,input,label,textarea,span,ul,li, button{
+   font-family: 'Open Sans', sans-serif; 
+ }
