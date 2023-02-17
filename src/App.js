@@ -37,7 +37,7 @@ function App() {
       {showBg && <div className="background-image" /> }
       {showBg && <img src={logoImage} alt="logo" className="logo" />}
       </div>
-   <div>testing-3</div>
+
     </div>
   );
 }
