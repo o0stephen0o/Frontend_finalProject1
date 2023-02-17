@@ -8,6 +8,7 @@ import './astronaut.css';
 import './learnbutton.css';
 import './images/fog01.jpg';
 import './images/heroshot2_mars.jpg';
+import './navbar.css';
 
 
 import logoImage from './images/Logo-removebg.png';
@@ -36,8 +37,7 @@ function App() {
       {showBg && <div className="background-image" /> }
       {showBg && <img src={logoImage} alt="logo" className="logo" />}
       </div>
-   
-
+   <div>testing-3</div>
     </div>
   );
 }
