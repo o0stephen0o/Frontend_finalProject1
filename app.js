@@ -6,17 +6,29 @@ const clearCartBtn = document.querySelector('.clear-cart');
 const cartDOM = document.querySelector('.cart');
 const cartOverlay = document.querySelector('.cart-overlay');
 const cartItems = document.querySelector('.cart-items');
+
+
 const cartTotal = document.querySelector('.cart-total');
+
+const cartFlightItems = document.querySelector('.cart-flight-items');
+const cartFlightTotal = document.querySelector('.cart-flight-total');
+
+const cartTripItems = document.querySelector('.cart-trip-items');
+const cartTripTotal = document.querySelector('.cart-trip-total');
+
 const cartFlightContent = document.querySelector('.cart-flight-content');
 const cartTripContent = document.querySelector('.cart-trip-content');
+
 const flightsDOM = document.querySelector('.flights-center');
 const tripsDOM = document.querySelector('.trip-center');
 
 
-// cart
-let cart = [];
+// flightCart , TripCart &  button Array
+let flightCart = [];
+let tripCart = [];
 let buttonsDOM = [];
 let tripButtonsDOM = [];
+
 
 //getting the products
 class Products {
@@ -263,13 +275,13 @@ class UI {
     getFlightsButtons() {
         const flightsButtons = [...document.querySelectorAll(".bag-btn")];               
         buttonsDOM = flightsButtons;            
-       
+        
             flightsButtons.forEach(button => {
                 let id = button.dataset.id;
-                let inCart = cart.find(item => item.id === id);
+                let inCart = flightCart.find(item => item.id === id);
                 if (inCart) {
-                    button.innerText = "More Ticket";
-                    // button.disabled = true;
+                    button.innerText = "In Cart";
+                     button.disabled = true;
                 }
 
                 button.addEventListener('click', (event) => {
@@ -277,17 +289,22 @@ class UI {
                     event.target.disabled = true;
                     //get product from products
                     let cartItem = {...Storage.getFlights(id), amount: 1};
-                    //add product to the cart
-                    cart = [...cart, cartItem];
+                    //add product to the flightCart
+                    flightCart = [...flightCart, cartItem];
 
-                    //save cart in local storage
-                    Storage.saveCart(cart);
-                    //set cart values
-                    this.setCartValues(cart);
-                    //display Flights cart item
+                    //save flightCart in local storage
+                    Storage.saveFlightCart(flightCart);
+                    
+                    //set Cart values
+                    this.setFlightCartValues(flightCart);
+                    
+                    
+                    
+                    
+                    //display Flights flightCart item
                     this.addFlightsCartItem(cartItem);
                                 
-                    //show the cart
+                    //show the flightCart
                     this.showCart();
                 });
             });     
@@ -299,58 +316,146 @@ class UI {
         const tripsButtons = [...document.querySelectorAll(".bag-trip-btn")];
 
         tripButtonsDOM = tripsButtons;
-       
+        
             tripsButtons.forEach(button => {
                 let id = button.dataset.id;
-                let inCart = cart.find(item => item.id === id);
+                let inCart = tripCart.find(item => item.id === id);
                 if (inCart) {
-                    button.innerText = "Trip in Cart";
-                    // button.disabled = true;
-                }
+                   
+                    button.innerText = "In Cart";
+                    
+                } 
 
-                button.addEventListener('click', (event) => {
-                    event.target.innerText = "In Cart";
-                    event.target.disabled = true;
-                    //get product from products
-                    let cartItem = {...Storage.getTrips(id), amount: 1};
-                    //add product to the cart
-                    cart = [...cart, cartItem];
+                    button.addEventListener('click', (event) => {
 
-                    //save cart in local storage
-                    Storage.saveCart(cart);
-                    //set cart values
-                    this.setCartValues(cart);
+                        event.target.innerText = "In Cart";
+                        event.target.disabled = true;
 
-                    //disply trip cart item
-                    this.addTripCartItem(cartItem);
-                    //show the cart
-                    this.showCart();
-                });
-           
+                        // if (Array.isArray(tripCart)) {
+                        //     tripCart.map((item, index) => {
+                        //         if (item.id === id) {
+                        //             tripCart[index].amount += 1;
+                        //             Storage.saveTripCart(tripCart);
+                        //             this.setTripCartValues(tripCart);
+                        //             this.setFlightCartValues(flightCart);
+                        //             this.setTotalCartValues();
+                        //             tripCartItemsDOM[index].innerHTML = this.getTripCartItemDOM(item);
+                        //
+                        //         }
+                        //     });
+                        // }
+                        
+                        
+                            
+                        // if (!Array.isArray(tripCart)) {
+
+                            //get product from products
+                            let cartItem = {...Storage.getTrips(id), amount: 1};
+                            //add product to the TripCart
+                            tripCart = [...tripCart, cartItem];
+
+                            //save TripCart in local storage
+                            Storage.saveTripCart(tripCart);
+
+                            //set Cart values
+                            this.setTripCartValues(tripCart);
+                            
+                            
+                            
+
+                            //display trip TripCart item
+                            this.addTripCartItem(cartItem);
+                            //show the TripCart
+                            this.showCart();
+                            
+                        // }
+
+                    });
+                
         });
     }
+    
 
 
 
-    setCartValues(cart) {
+    setFlightCartValues(cart) {
         let tempTotal = 0;
         let itemsTotal = 0;
+        let tripCartTotal = 0;
+        let tripItems = 0;
         
         cart.map(item => {
             tempTotal += item.price * item.amount;
             itemsTotal += item.amount;
         });
         
-        cartTotal.innerText = parseFloat(tempTotal.toFixed(2));
-        cartItems.innerText = itemsTotal;
+        cartFlightTotal.innerText = parseFloat(tempTotal.toFixed(2));
+        cartFlightItems.innerText = itemsTotal;
+        //cartItems.innerText = parseInt(itemsTotal.innerText) + parseInt(cartTripItems.innerText);
 
+
+        if(tripCart) {
+            for(let i = 0; i < tripCart.length; i++) {
+                tripCartTotal += tripCart[i].price * tripCart[i].amount;
+                tripItems += tripCart[i].amount;
+            }
+        }
+
+        if(tripCart) {
+            cartTotal.innerText = parseInt(tempTotal) + parseInt(tripCartTotal);
+            cartItems.innerText = itemsTotal + parseInt(tripItems);
+        } else {
+            cartTotal.innerText = parseInt(tempTotal.toFixed(2))
+            cartItems.innerText = itemsTotal;
+        }
+        
+        
+       
+        
     }
+
+    setTripCartValues(cart) {
+        let tempTotal = 0;
+        let itemsTotal = 0;
+        let flightCartTotal = 0;
+        let flightItems = 0;
+        
+        cart.map(item => {
+            tempTotal += item.price * item.amount;
+            itemsTotal += item.amount;
+        });
+        
+        
+        cartTripTotal.innerText = parseFloat(tempTotal.toFixed(2));
+        cartTripItems.innerText = itemsTotal;
+        
+        if(flightCart) {
+            for(let i = 0; i < flightCart.length; i++) {
+                flightCartTotal += flightCart[i].price * flightCart[i].amount;
+                flightItems += flightCart[i].amount;
+            }
+        }
+        
+         if(flightCart) {
+            cartTotal.innerText = parseInt(tempTotal) + parseInt(flightCartTotal);
+            cartItems.innerText = itemsTotal + parseInt(flightItems);
+         } else {
+              cartTotal.innerText = parseInt(tempTotal.toFixed(2))
+             cartItems.innerText = itemsTotal;
+          }
+       
+                   
+    }
+
+   
+        
+        
 
     addFlightsCartItem(item) {
         const div = document.createElement('div');
         div.classList.add('cart-flight-item');
         div.innerHTML = `
-        <!-- start 1 of cart items -->           
+        <!-- start 1 of flightCart items -->           
         
         <img src=${item.image} alt="flights" height="1rem" width="1.5rem">
         <div>
@@ -364,7 +469,7 @@ class UI {
             <p class="item-amount" >${item.amount}</p>
             <i class="fas fa-chevron-down" data-id=${item.id}></i>
         </div>
-        <!-- end 1 of cart items -->
+        <!-- end 1 of flightCart items -->
         `;
         cartFlightContent.appendChild(div);
         // console.log(cartFlightContent);
@@ -374,12 +479,12 @@ class UI {
         const div = document.createElement('div');
         div.classList.add('cart-trip-item');
         div.innerHTML = `
-        <!-- start 1 of cart items -->
+        <!-- start 1 of flightCart items -->
         <img src=${item.image1} alt="trips" height="1rem" width="1.5rem">
         <div>
             <p style="line-height: 1.5px;">            : ${item.tripTitle}</p>
             <p style="line-height: 1.5px;">Journey Date: ${item.date} </p>
-            <p style="line-height: 1.5px;">Discount Price: USD ${item.discountPrice}</p>
+            <p style="line-height: 1.5px;">Discount Price: USD ${item.price}</p>
             <span class="remove-item" data-id=${item.id} style="line-height: 1.5px;">remove</span>
         </div>
         <div>
@@ -387,7 +492,7 @@ class UI {
             <p class="item-amount" >${item.amount}</p>
             <i class="fas fa-chevron-down" data-id=${item.id}></i>
         </div>
-        <!-- end 1 of cart items -->
+        <!-- end 1 of flightCart items -->
         
         `;
         cartTripContent.appendChild(div);
@@ -401,15 +506,61 @@ class UI {
     }
 
     setupAPP() {
-        cart = Storage.getCart();
-        this.setCartValues(cart);
-        this.populateCart(cart);
+        flightCart = Storage.getFlightCart();
+        tripCart = Storage.getTripCart();
+        
+        this.setFlightCartValues(flightCart);
+        this.setTripCartValues(tripCart);
+        //this.setTotalCartValues();
+
+           
+        this.populateFlightCart(flightCart);
+        this.populateTripCart(tripCart);
+                
         cartBtn.addEventListener('click', this.showCart);
         closeCartBtn.addEventListener('click', this.hideCart);
     }
 
-    populateCart(cart) {
+    setupFlightAPP() {
+        flightCart = Storage.getFlightCart();
+        tripCart = Storage.getTripCart();
+
+        this.setFlightCartValues(flightCart);
+     
+        //this.setTotalCartValues();
+
+
+        this.populateFlightCart(flightCart);
+        this.populateTripCart(tripCart);
+
+        cartBtn.addEventListener('click', this.showCart);
+        closeCartBtn.addEventListener('click', this.hideCart);
+    }
+
+    setupTripAPP() {
+        flightCart = Storage.getFlightCart();
+        tripCart = Storage.getTripCart();
+
+        
+        this.setTripCartValues(tripCart);
+        //this.setTotalCartValues();
+
+        this.populateTripCart(tripCart);
+        this.populateFlightCart(flightCart);
+        
+
+        cartBtn.addEventListener('click', this.showCart);
+        closeCartBtn.addEventListener('click', this.hideCart);
+    }
+
+    
+
+    populateFlightCart(cart) {
         cart.forEach(item => this.addFlightsCartItem(item));
+        
+    }
+    
+    populateTripCart(cart) {
         cart.forEach(item => this.addTripCartItem(item));
     }
 
@@ -419,39 +570,44 @@ class UI {
     }
 
     cartLogic() {
-        //clear cart button
+        //clear flightCart button
         clearCartBtn.addEventListener('click', () => {
-            this.clearCart();
+            this.clearFlightCart();
+            this.clearTripCart();
+            
         });
-        //Flght Cart functionality
+        //Flight Cart functionality
         cartFlightContent.addEventListener('click', event => {
             if(event.target.classList.contains('remove-item')) {
                 let removeItem = event.target;
                 let id = removeItem.dataset.id;
                 cartFlightContent.removeChild(removeItem.parentElement.parentElement);
-                this.removeItem(id);
+                this.removeFlightItem(id);
                 
             } else if(event.target.classList.contains('fa-chevron-up')) {
                 let addAmount = event.target;
                 let id = addAmount.dataset.id;
-                let tempItem = cart.find(item => item.id === id);
+                let tempItem = flightCart.find(item => item.id === id);
                 tempItem.amount = tempItem.amount + 1;
-                Storage.saveCart(cart);
-                this.setCartValues(cart);                
+                Storage.saveFlightCart(flightCart);
+                this.setFlightCartValues(flightCart); 
+                
                 addAmount.nextElementSibling.innerText = tempItem.amount;
                 
             } else if(event.target.classList.contains('fa-chevron-down')) {
                 let lowerAmount = event.target;
                 let id = lowerAmount.dataset.id;
-                let tempItem = cart.find(item => item.id === id);
+                let tempItem = flightCart.find(item => item.id === id);
                 tempItem.amount = tempItem.amount - 1;
                 if(tempItem.amount > 0) {
-                    Storage.saveCart(cart);
-                    this.setCartValues(cart);
+                    Storage.saveFlightCart(flightCart);
+                    this.setFlightCartValues(flightCart);
+                   
                     lowerAmount.previousElementSibling.innerText = tempItem.amount;
                 } else {
                     cartFlightContent.removeChild(lowerAmount.parentElement.parentElement);
-                    this.removeItem(id);
+                    this.removeFlightItem(id);
+                    this.setFlightCartValues(flightCart);
                 }
             }
         });
@@ -461,71 +617,98 @@ class UI {
             if(event.target.classList.contains('remove-item')) {
                 let removeItem = event.target;
                 let id = removeItem.dataset.id;
-                cartFlightContent.removeChild(removeItem.parentElement.parentElement);
-                this.removeItem(id);
+                cartTripContent.removeChild(removeItem.parentElement.parentElement);
+                this.removeTripItem(id);
 
             } else if(event.target.classList.contains('fa-chevron-up')) {
                 let addAmount = event.target;
                 let id = addAmount.dataset.id;
-                let tempItem = cart.find(item => item.id === id);
+                let tempItem = tripCart.find(item => item.id === id);
                 tempItem.amount = tempItem.amount + 1;
-                Storage.saveCart(cart);
-                this.setCartValues(cart);
+                Storage.saveTripCart(tripCart);
+                this.setTripCartValues(tripCart);
+                
+                
                 addAmount.nextElementSibling.innerText = tempItem.amount;
 
             } else if(event.target.classList.contains('fa-chevron-down')) {
                 let lowerAmount = event.target;
                 let id = lowerAmount.dataset.id;
-                let tempItem = cart.find(item => item.id === id);
+                let tempItem = tripCart.find(item => item.id === id);
                 tempItem.amount = tempItem.amount - 1;
                 if(tempItem.amount > 0) {
-                    Storage.saveCart(cart);
-                    this.setCartValues(cart);
+                    Storage.saveTripCart(tripCart);
+                    this.setTripCartValues(tripCart);
+                    
                     lowerAmount.previousElementSibling.innerText = tempItem.amount;
                 } else {
-                    cartFlightContent.removeChild(lowerAmount.parentElement.parentElement);
-                    this.removeItem(id);
+                    cartTripContent.removeChild(lowerAmount.parentElement.parentElement);
+                    this.removeTripItem(id);
+                    this.setTripCartValues()
                 }
             }
         });
     }
 
-    clearCart() {
-        let cartItems = cart.map(item => item.id);
-        cartItems.forEach(id => this.removeItem(id));
-        while(cartFlightContent.children.length > 0 || cartTripContent.children.length > 0) {
-            cartFlightContent.removeChild(cartFlightContent.children[0]) ;
-            cartTripContent.removeChild(cartTripContent.children[0]);
+    clearFlightCart() {
+        let flightCartItem = flightCart.map(item => item.id);
+        
+        flightCartItem.forEach(id => this.removeFlightItem(id));
+        while(cartFlightContent.children.length > 0 ) {
+            cartFlightContent.removeChild(cartFlightContent.children[0]) ;           
         }
-    
         this.hideCart();
+        //this.setTotalCartValues()
+    }
+    
+    clearTripCart(){
+        
+        let tripCartItem = tripCart.map(item => item.id);
+
+        tripCartItem.forEach(id => this.removeTripItem(id));
+        
+        while(cartTripContent.children.length > 0 ) {
+            cartTripContent.removeChild(cartTripContent.children[0]) ;
+        }
+        this.hideCart();
+        //this.setTotalCartValues()
     }
 
-    removeItem(id) {
-        cart = cart.filter(item => item.id !== id);
-        this.setCartValues(cart);
-        Storage.saveCart(cart);  
+    removeFlightItem(id) {
+        flightCart = flightCart.filter(item => item.id !== id);
         
-        let button = this.getSingleButton(id);
-        let tripButton = this.getSingleTripButton(id);
         
-        if(tripButton.length > 0) {
-            tripButton.disabled = false;
-            tripButton.innerHTML = `join`;
-        }     
-        else if(button.length > 0) {
+        this.setFlightCartValues(flightCart);
+        Storage.saveFlightCart(flightCart);         
+        
+        let button = this.getSingleFlightButton(id);       
+        
+        if(button.length > 0) {
         button.disabled = false;
         button.innerHTML = `GO`;
         }
     }
 
-    getSingleButton(id) {
+    removeTripItem(id) {
+        
+        tripCart = tripCart.filter(item => item.id !== id);
+
+        this.setTripCartValues(tripCart);
+        Storage.saveTripCart(tripCart);
+
+        let tripButton = this.getSingleTripButton(id);
+
+        if(tripButton.length > 0) {
+            tripButton.disabled = false;
+            tripButton.innerHTML = `join`;
+        }      
+    }
+    getSingleFlightButton(id) {
         return buttonsDOM.find(button => button.dataset.id === id) ;
         
-    }
-    
+    }    
     getSingleTripButton(id) {
-        return tripButtonsDOM.find(button => button.dataset.id === id) ;
+        return tripButtonsDOM.find(tripButton => tripButton.dataset.id === id) ;
         
     }
     
@@ -555,13 +738,23 @@ class Storage {
         return trips.find(trip => trip.id === id);
     }
 
-    static saveCart(cart) {
-        localStorage.setItem("cart", JSON.stringify(cart));
+    static saveFlightCart(flightCart) {
+        localStorage.setItem("flightCart", JSON.stringify(flightCart));
     }
 
-    static getCart() {
-        return localStorage.getItem("cart") ?
-            JSON.parse(localStorage.getItem("cart"))
+    static saveTripCart(tripCart) {
+        localStorage.setItem("tripCart", JSON.stringify(tripCart));
+    }
+
+    static getFlightCart() {
+        return localStorage.getItem("flightCart") ?
+            JSON.parse(localStorage.getItem("flightCart"))
+            : [];
+    }
+
+    static getTripCart() {
+        return localStorage.getItem("tripCart") ?
+            JSON.parse(localStorage.getItem("tripCart"))
             : [];
     }
 }
@@ -573,9 +766,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const tripPage = /.*page-trip.*/;
 
     //setup app
-    ui.setupAPP();
+    
+   
     
     if(flightsPage.test(window.location)){
+        ui.setupFlightAPP()
         //get all products
         products.getFlights().then(flights => {
             ui.displayFlights(flights);     
@@ -586,6 +781,7 @@ document.addEventListener("DOMContentLoaded", () => {
             ui.cartLogic();
         });
     } else if(tripPage.test(window.location)){
+       ui.setupTripAPP()
         //get all journeys
         products.getTrips().then(trips => {
             ui.displayTrips(trips);            
