@@ -21,7 +21,8 @@ const cartTripContent = document.querySelector('.cart-trip-content');
 
 const flightsDOM = document.querySelector('.flights-center');
 const tripsDOM = document.querySelector('.trip-center');
-
+const checkOutFlightDOM = document.querySelector('.checkout-flight-center');
+const checkOutTripDOM = document.querySelector('.checkout-trip-center');
 
 // flightCart , TripCart &  button Array
 let flightCart = [];
@@ -114,6 +115,8 @@ class Products {
             console.log(error);
         }
     }
+    
+    
 }
 
 //----------------------------------End of the products 
@@ -274,7 +277,61 @@ class UI {
         
         });
     }
+    
+    displayFlightCheckOut(flightCartItems) {
+        
+        let result = '';
+        flightCartItems.forEach(flight => {
+            result += `
+            
+            <tr class="flight-table-item">
+                <td>
+                    <img src=${flight.image} alt="flightCheckOut" height="1rem" width="1.5rem"/>
+                </td>
+                <td >${flight.destination} </td>                  
+                <td>${flight.date} - ${flight.month}</td>                
+                <td >${flight.price}  </td>
+                <td>${flight.amount} </td>              
+                
+            </tr>
+      
+            `;
+        });
+        
+        checkOutFlightDOM.innerHTML = result;
+        
+    }
 
+    displayTripCheckOut(tripCartItems) {
+
+        let result = '';
+        tripCartItems.forEach(trip => {
+            result += `
+            <div class="card" >
+                <div class="img-tag card-img-top" >
+                    <img src=${trip.image2} alt="tripCart" height="2rem" width="2rem">
+                </div>
+                <div class="card-body content-tag" >
+                    <div class="card-text">
+                        <h5>Trip: ${trip.tripTitle}</h5>
+                        <p>OverView: ${trip.overView}</p>
+                    </div>
+                </div>
+                <div class="card-footer price-tag">
+                    
+                        <p>Price: ${trip.price}</p>
+                        <p>Amount: ${trip.amount}</p>
+                    </div>
+                </div>
+                
+            </div>
+            <br/>
+            `;
+        });
+        
+        checkOutTripDOM.innerHTML = result;
+
+    }
     getFlightsButtons() {
         const flightsButtons = [...document.querySelectorAll(".bag-btn")];               
         buttonsDOM = flightsButtons;            
@@ -361,8 +418,6 @@ class UI {
     }
     
 
-
-
     setFlightCartValues(cart) {
         let tempTotal = 0;
         let itemsTotal = 0;
@@ -431,7 +486,7 @@ class UI {
         }   
     }
 
-
+    
     addFlightsCartItem(item) {
         const div = document.createElement('div');
         div.classList.add('cart-flight-item');
@@ -492,12 +547,12 @@ class UI {
         
         this.setFlightCartValues(flightCart);
         this.setTripCartValues(tripCart);
-        //this.setTotalCartValues();
-
-           
+        
+        //this.setTotalCartValues();    
+        
         this.populateFlightCart(flightCart);
         this.populateTripCart(tripCart);
-                
+        
         cartBtn.addEventListener('click', this.showCart);
         closeCartBtn.addEventListener('click', this.hideCart);
     }
@@ -506,8 +561,7 @@ class UI {
         flightCart = Storage.getFlightCart();
         tripCart = Storage.getTripCart();
 
-        this.setFlightCartValues(flightCart);
-     
+        this.setFlightCartValues(flightCart);     
         //this.setTotalCartValues();
 
 
@@ -534,7 +588,21 @@ class UI {
         closeCartBtn.addEventListener('click', this.hideCart);
     }
 
-    
+    setupGeneralAPP() {
+        flightCart = Storage.getFlightCart();
+        tripCart = Storage.getTripCart();
+
+        this.setFlightCartValues(flightCart);
+        this.setTripCartValues(tripCart);
+        //this.setTotalCartValues();
+
+        this.populateFlightCart(flightCart);
+        this.populateTripCart(tripCart);
+
+        cartBtn.addEventListener('click', this.showCart);
+        closeCartBtn.addEventListener('click', this.hideCart);
+
+    }
 
     populateFlightCart(cart) {
         cart.forEach(item => this.addFlightsCartItem(item));
@@ -661,12 +729,12 @@ class UI {
         this.setFlightCartValues(flightCart);
         Storage.saveFlightCart(flightCart);         
         
-        let button = this.getSingleFlightButton(id);       
-        
-        if(button.length > 0) {
-        button.disabled = false;
-        button.innerHTML = `GO`;
-        }
+        // let button = this.getSingleFlightButton(id);       
+        //
+        // if(button.length > 0) {
+        // button.disabled = false;
+        // button.innerHTML = `GO`;
+        // }
     }
 
     removeTripItem(id) {
@@ -676,12 +744,12 @@ class UI {
         this.setTripCartValues(tripCart);
         Storage.saveTripCart(tripCart);
 
-        let tripButton = this.getSingleTripButton(id);
-
-        if(tripButton.length > 0) {
-            tripButton.disabled = false;
-            tripButton.innerHTML = `join`;
-        }      
+        // let tripButton = this.getSingleTripButton(id);
+        //
+        // if(tripButton.length > 0) {
+        //     tripButton.disabled = false;
+        //     tripButton.innerHTML = `join`;
+        // }      
     }
     getSingleFlightButton(id) {
         return buttonsDOM.find(button => button.dataset.id === id) ;
@@ -723,26 +791,55 @@ class Storage {
     static saveTripCart(tripCart) {
         localStorage.setItem("tripCart", JSON.stringify(tripCart));
     }
-
+    
     static getFlightCart() {
         return localStorage.getItem("flightCart") ?
             JSON.parse(localStorage.getItem("flightCart"))
             : [];
     }
+    
     static getTripCart() {
         return localStorage.getItem("tripCart") ?
             JSON.parse(localStorage.getItem("tripCart"))
             : [];
     }
+    
+    static getFlightButtons() {
+        let flightButtons = JSON.parse(localStorage.getItem("flightButtons"));
+        return flightButtons;
+    }
+    
+    static getTripButtons() {
+        let tripButtons = JSON.parse(localStorage.getItem("tripButtons"));
+        return tripButtons;
+    }
+    
+    static saveFlightButtons(flightButtons) {
+        localStorage.setItem("flightButtons", JSON.stringify(flightButtons));
+    }
+    
+    static saveTripButtons(tripButtons) {
+        localStorage.setItem("tripButtons", JSON.stringify(tripButtons));
+    }
+
+
+
+    
 }
 
 //----------------------------------End of local storage
 
 document.addEventListener("DOMContentLoaded", () => {
     const ui = new UI();
-    const products = new Products();    
+    const products = new Products();
+    let flightCartItems = [];
+    let tripCartItems = [];
+    flightCartItems = JSON.parse(localStorage.getItem('flightCart'));
+    tripCartItems = JSON.parse(localStorage.getItem('tripCart'));
+
     const flightsPage = /.*page-flights.*/;
     const tripPage = /.*page-trip.*/;
+    const checkoutPage = /.*page-checkout.*/;
 
     //setup app
     
@@ -758,7 +855,9 @@ document.addEventListener("DOMContentLoaded", () => {
             ui.cartLogic();
         });
     } else if(tripPage.test(window.location)){
+        
         ui.setupTripAPP()
+        
         //get all journeys
         products.getTrips().then(trips => {
             ui.displayTrips(trips);            
@@ -770,6 +869,35 @@ document.addEventListener("DOMContentLoaded", () => {
             ui.getTripsButtons();
             ui.cartLogic();
         });
+    } else if (checkoutPage.test(window.location)){
+        
+        //setUpGeneralApp
+        
+        ui.setupGeneralAPP()
+        console.log(flightCartItems);
+        console.log(tripCartItems);
+        ui.displayFlightCheckOut(flightCartItems);
+        ui.displayTripCheckOut(tripCartItems);
+
+        ui.cartLogic();
+        
+        //Retrieve data from local storage
+        
+        // storages.getFlightCart().then(flightCart => {
+        //     
+        //     ui.displayFlightCheckOut(flightCart);
+        //     
+        // }).then(() => {
+        //     
+        //     storages.getTripCart().then(tripCart => {
+        //         ui.displayTripCheckOut(tripCart);});
+        //        
+        // }).then(() => {
+        //     
+        //     ui.displayGeneralCheckOutInfo();
+        //     ui.cartLogic();
+        // });
+
     }
 
 
