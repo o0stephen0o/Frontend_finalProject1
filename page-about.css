@@ -1,0 +1,395 @@
+
+ /* CSS For Basic ITEMS */
+ body {
+  background-color: black;
+  color: #ffffff;
+  }
+
+/* Font Setting */
+@font-face {
+  font-family: 'D-din';
+  src: url('font/D-DIN.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  }
+
+@font-face {
+  font-family: 'D-din-bold';
+  src: url('font/D-DIN-Bold.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'D-din-Condensed';
+    src: url('font/D-DINCondensed.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    }
+
+h1,h2,h3,h4,h5 {
+  font-family: 'D-din', sans-serif;
+
+ }
+
+p,a,input,label,textarea,span,ul,li{
+  font-family: 'Open Sans', sans-serif; 
+ }
+
+/* basic css for nav bar */
+    /*
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 2rem 2rem;
+        background-color: #282828;
+      }
+      
+      .logo {
+        flex: 1;
+        padding-left: 2rem;
+      }
+      
+      .nav-links {
+        display: flex;
+        justify-content: flex-end;
+        flex: 1;
+        padding-right: 2rem;
+      }
+      
+      .nav-links li {
+        margin-left: 1.5rem;
+        margin-right: 2rem; 
+        list-style: none;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #fff;
+      }
+      */
+
+
+/* CSS for navbar.html */
+      /* 左右上下的空間 */
+      .navbar-brand {
+        margin : 2rem;
+     
+      }
+      .navbar-toggler {
+        margin : 1rem;
+      }
+  
+      .navbar-collapse {
+        text-align: left;
+        padding-left: 2rem;
+      }
+      
+      /* Nav bar 整體高度 */
+      .navbar {
+        height: auto;
+      }
+    
+      /* Logo Size*/
+      .navbar-brand img {
+        vertical-align: auto;
+        border-style: none;
+        width: 130px;
+      }
+
+      /* 選單列每個項目之間的距離 */
+      .navbar-nav > li {
+        margin-right: 2.5rem;
+      }
+
+      .navbar-nav > li :hover{
+        border-bottom: #ffffff .99px solid;
+      }
+  
+      .nav-links li :last-child{
+        margin-bottom: 5rem 
+      }
+      
+
+      /* NAVBAR 的背上設為深灰色，文字變成白色 */
+      .navbar {
+        background-color: #000000 !important;
+      }
+
+      .navbar a {
+        color: #ffffff !important;
+      }
+
+      .navbar a:hover {
+        color: #ffffff !important;
+      }
+
+
+      /* navbar toggler icon 改成沒有邊框 */
+      .navbar-toggler {
+        border: none;
+        padding-left: 2rem ;
+      }
+      /*把自家製作的圖嵌到樣式中*/
+      .navbar-toggler-icon {
+        background-image: url('Img/Nav/sim-w.png') !important;
+      }
+      .navbar-toggler-icon:hover {
+        background-image: url('Img/Nav/simb-w.png') !important;
+      }
+    
+      /*字體設定*/
+      p,a,input,label,textarea,span,ul,li,.light-btn{
+        font-family: 'Open Sans', sans-serif;
+        font-size: 14px;
+        letter-spacing: 2px;
+        
+      }
+      /* 設定按鈕的外觀 */
+
+
+
+/* CSS for scetion 1*/
+
+#about {
+  width: 100%;
+  height: 70vh;
+  position: relative;
+}
+
+#about h1{
+  font-size: 70px;
+  font-weight: 550;
+  line-height: 1;
+  letter-spacing: 1px;
+  color: #ffffff;
+  margin: 0;
+  padding: 20px;
+
+
+}
+#about p{
+  font-size: 14px;
+  line-height: 1.5;  
+  color: #ffffff;
+  margin: 0;
+  padding: 20px;
+}
+
+
+.video-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.video-foreground {
+  width: 100%;
+  height: 100%;
+  -moz-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  -o-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.video-background video {
+  min-height: 100%;
+  min-width: 100%;
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media (pointer: coarse) and (hover: none) {
+  .video-background {
+    display: none;
+  }
+}
+
+
+/* CSS for section 2 */
+
+
+.section-2 {
+  width: 100%;
+  height: 50vh;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0px;
+  
+}
+
+.section-2 h5 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.section-2 h1 {
+  font-family: 'D-din-Condensed';
+  font-size: 140px;
+  font-weight: 400;
+  
+  letter-spacing: -1 rem;
+}
+
+#air p{
+  font-size: 16px;
+  line-height: 1.5;  
+  color: #ffffff;
+  margin: 0;
+}
+
+@media (max-width: 800px) {
+  .section-2 {
+    height: 70vh;
+  }
+
+}
+
+
+
+/* CSS for section 3 */
+
+.section-3 {
+  width: 100%;
+  height: 70vh;
+  background-color: #000;
+  display: flex;
+  margin-top: 0px;
+  margin-bottom: 80px;
+}
+
+
+
+.section-3 .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 0 50px;
+}
+
+.section-3-title {
+  font-size: 70px;
+  line-height: 1;
+  letter-spacing: 1px;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.section-3 p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 40px;
+}
+
+.section-3 img {
+  width: 100%;
+  height: auto;
+}
+
+
+/* CSS for section 4 */
+
+.section-4  {
+  width: 100%;
+  height: 70vh;
+  background: url('Img/About/crew.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  margin-top: 0px;
+  margin-bottom: 80px;
+}
+
+
+
+.section-4 .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 0 50px;
+}
+
+.section-4-title{
+  font-size: 70px;
+  line-height: 1;
+  letter-spacing: -1px;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+
+.section-4 p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 40px;
+}
+
+.section-4 img {
+  width: 100%;
+  height: auto;
+}
+
+
+
+
+/* ----------- START of footer ----------- */
+.footer { 
+  /* background: url(./Img/Footer/footer-bottom.png); */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position:sticky;
+  max-width: 100%; height: auto;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* .footer-logo effect */
+.footer .footer-logo .a {
+  opacity: 1;
+  border: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 5px;
+}
+
+/* social media effect */
+.footer .social-effect a {
+    color: #ffffff;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 5px;
+    margin: 5px;
+  }
+
+.footer .social-effect a:hover {
+    color: #ffffff;
+    border-bottom: #ffffff 1px solid;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 5px;
+    margin: 5px;
+  }
+/* ----------- END of footer ----------- */
