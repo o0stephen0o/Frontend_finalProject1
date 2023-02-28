@@ -31,6 +31,8 @@ body {
     opacity: 0;
   } 
 
+
+
   #logo {
     position: absolute;
     top: 40%;
@@ -42,6 +44,20 @@ body {
     animation: zoomIn 3s forwards;
     }
 
+    #logo {
+      position: absolute;
+      /* background-position: center; */
+      top: 47%;
+      left: 43%;
+      width: 15%;
+      height: auto;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      animation: zoomIn 3s forwards;
+      }
+
+
+
   #small-image {
     position: absolute;
     top: 50%;
@@ -51,6 +67,8 @@ body {
     transform: translate(-50%, -50%) rotate(0deg);
     animation: moveAndRotate 10s ease-in-out infinite;
   }
+
+
 
   @keyframes zoomIn {
     from {

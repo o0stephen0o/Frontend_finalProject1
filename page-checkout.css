@@ -236,38 +236,59 @@
      top:1.6rem;
  }
  
- .flight-table-header{
+ .s-line {
+     
+     width: 80%;
+     border-bottom:3px solid wheat;
+     
+   
+ }
+ 
+ .flight-table-header, .trip-table-header, .checkout-flight-footer, .checkout-trip-footer, .checkout-lumpSum{
      
      width: 100%;
      color: wheat;
-     font-size: 0.9rem;
+     font-size: 0.7rem;
      text-transform: uppercase;
      letter-spacing: 0.1rem;
      font-weight: 200;
      /*border: 1px solid #fff;*/
      
  }
- 
-.flight-header-row > th{
+
+
+ .flight-header-row > th, .trip-header-row > th {
     /*border: 1px solid #fff;*/
     width: 20%;
 }
- 
+
 
  
- .flight-table-body {
-     width: 100%;
-     
-   
+ .flight-table-body, .trip-table-body{
+     width: 100%;   
  }
  
-    .flight-table-item > td {
-        width: 20%;
-        font-size: 0.8rem;
-        color:wheat;
-        /*border: 1px solid #fff;*/
-        
-    }
+.flight-table-item > td, .trip-table-item > td {
+    width: 20%;
+    font-size: 0.6rem;
+    color:wheat;
+    /*border: 1px solid #fff;*/
+    
+}
+
+#flight-foot-1, #trip-foot-1, #lumpSum-footer-1{
+    
+    /*position: relative;*/
+    /*left: 19rem;*/
+    font-weight: 200;
+    width:60%
+}
+
+#flight-foot-2, #flight-foot-3, #trip-foot-2, #trip-foot-3, #lumpSum-footer-2, #lumpSum-footer-3{
+    width:20%;
+}
+
+/* ----------End Of CheckOut List --------------*/
  
  /*---------------cart------------------*/
 
@@ -318,6 +339,8 @@
      letter-spacing: var(--mainSpacing);
      margin-bottom: 2rem;
  }
+ 
+ 
  /*---------- Cart Item -------------------- */
  .cart-flight-item {
      display: grid;

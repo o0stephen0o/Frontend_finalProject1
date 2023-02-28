@@ -5,6 +5,15 @@
   color: #ffffff;
   }
 
+ :root {
+     --primaryColor: #faf8f8;
+     --mainWhite: #fff;
+     --mainBlack: #222;
+     --mainGrey: #ececec;
+     --mainSpacing: 0.1rem;
+     --mainTransition: all 0.3s linear;
+ }
+
 /* Font Setting */
 @font-face {
   font-family: 'D-din';
@@ -148,35 +157,40 @@ p,a,input,label,textarea,span,ul,li{
       }
       /* 設定按鈕的外觀 */
 
-
-
-/* CSS for scetion 1*/
+/* Section 1 */
 
 #about {
   width: 100%;
-  height: 70vh;
+  height: auto;
   position: relative;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  color: #ffffff;
+  margin-bottom: 40px;
 }
 
-#about h1{
-  font-size: 70px;
+#about h1 {
+  font-size: 55px; /* 調整字體大小 */
   font-weight: 550;
   line-height: 1;
   letter-spacing: 1px;
   color: #ffffff;
   margin: 0;
   padding: 20px;
-
-
 }
-#about p{
-  font-size: 14px;
-  line-height: 1.5;  
+
+#about p {
+  font-size: 14px; /* 調整字體大小 */
+  line-height: 1.5;
   color: #ffffff;
   margin: 0;
   padding: 20px;
 }
-
 
 .video-background {
   position: absolute;
@@ -191,10 +205,6 @@ p,a,input,label,textarea,span,ul,li{
 .video-foreground {
   width: 100%;
   height: 100%;
-  -moz-transform: scale(1.1);
-  -webkit-transform: scale(1.1);
-  -o-transform: scale(1.1);
-  -ms-transform: scale(1.1);
   transform: scale(1.1);
 }
 
@@ -218,20 +228,18 @@ p,a,input,label,textarea,span,ul,li{
 
 /* CSS for section 2 */
 
-
 .section-2 {
-  width: 100%;
-  height: 50vh;
+  min-height: 50vh;
   background-color: #000;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 0px;
-  
+  position: relative;
+  z-index: 2;
 }
 
 .section-2 h5 {
-  font-size: 28px;
+  font-size: 20px;
   font-weight: 600;
   margin-bottom: 10px;
 }
@@ -240,38 +248,35 @@ p,a,input,label,textarea,span,ul,li{
   font-family: 'D-din-Condensed';
   font-size: 140px;
   font-weight: 400;
-  
-  letter-spacing: -1 rem;
-}
-
-#air p{
-  font-size: 16px;
-  line-height: 1.5;  
-  color: #ffffff;
-  margin: 0;
+  letter-spacing: 0rem;
 }
 
 @media (max-width: 800px) {
   .section-2 {
-    height: 70vh;
+    min-height: 70vh;
+   
   }
-
 }
+
+.wrapper {
+  margin-top: calc(50vh + 60px); /* 60px 是 .section-1 h1 的高度 */
+}
+
+
 
 
 
 /* CSS for section 3 */
 
+
 .section-3 {
   width: 100%;
-  height: 70vh;
+  height: auto;
   background-color: #000;
   display: flex;
   margin-top: 0px;
   margin-bottom: 80px;
 }
-
-
 
 .section-3 .container {
   display: flex;
@@ -283,7 +288,7 @@ p,a,input,label,textarea,span,ul,li{
 }
 
 .section-3-title {
-  font-size: 70px;
+  font-size: 55px;
   line-height: 1;
   letter-spacing: 1px;
   color: #ffffff;
@@ -291,7 +296,7 @@ p,a,input,label,textarea,span,ul,li{
 }
 
 .section-3 p {
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.5;
   margin-bottom: 40px;
 }
@@ -300,6 +305,51 @@ p,a,input,label,textarea,span,ul,li{
   width: 100%;
   height: auto;
 }
+
+@media screen and (max-width: 768px) {
+  .section-3 {
+    height: auto;
+  }
+  
+  .section-3 .container {
+    padding: 50px;
+  }
+  
+  .section-3-title {
+    font-size: 55px;
+    margin-bottom: 10px;
+  }
+  
+  .section-3 p {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  
+  .section-3 img {
+    margin-top: 20px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .section-3 .container {
+    padding: 50px;
+  }
+  
+  .section-3-title {
+    font-size: 55px;
+    margin-bottom: 5px;
+  }
+  
+  .section-3 p {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+  .section-3 img {
+    margin-top: 10px;
+  }
+}
+
 
 
 /* CSS for section 4 */
@@ -327,7 +377,7 @@ p,a,input,label,textarea,span,ul,li{
 }
 
 .section-4-title{
-  font-size: 70px;
+  font-size: 55px;
   line-height: 1;
   letter-spacing: -1px;
   color: #ffffff;
@@ -336,7 +386,7 @@ p,a,input,label,textarea,span,ul,li{
 
 
 .section-4 p {
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.5;
   margin-bottom: 40px;
 }
@@ -345,6 +395,122 @@ p,a,input,label,textarea,span,ul,li{
   width: 100%;
   height: auto;
 }
+
+ /*---------------cart------------------*/
+
+ .cart-overlay {
+     position: fixed;
+     top: 0;
+     right: 0;
+     width: 100%;
+     height: 100%;
+     transition: var(--mainTransition);
+     background: rgb(240, 157, 81, 0.5);
+     z-index: 2;
+     visibility: hidden;
+ }
+ .cart {
+     position: fixed;
+     top: 0;
+     right: 0;
+     width: 100%;
+     height: 100%;
+     overflow: scroll;
+     z-index: 3;
+     background: rgb(231, 226, 221);
+     padding: 1.5rem;
+     transition: var(--mainTransition);
+     transform: translateX(100%);
+ }
+ .showCart {
+     transform: translateX(0);
+ }
+ .transparentBcg {
+     visibility: visible;
+ }
+ @media screen and (min-width: 768px) {
+     .cart {
+         width: 30vw;
+         min-width: 450px;
+     }
+ }
+
+ .close-cart {
+     font-size: 1.7rem;
+     cursor: pointer;
+ }
+ .cart h2 {
+     text-transform: capitalize;
+     text-align: center;
+     letter-spacing: var(--mainSpacing);
+     margin-bottom: 2rem;
+ }
+ /*---------- Cart Item -------------------- */
+ .cart-flight-item {
+     display: grid;
+     align-items: center;
+     grid-template-columns: auto 1fr auto;
+     grid-column-gap: 1.5rem;
+     margin: 1.5rem 0;
+ }
+
+ .cart-trip-item {
+     display: grid;
+     align-items: center;
+     grid-template-columns: auto 1fr auto;
+     grid-column-gap: 1.5rem;
+     margin: 1.5rem 0;
+ }
+
+ .cart-item img {
+     width: 75px;
+     height: 75px;
+ }
+ .cart-item h4 {
+     font-size: 0.85rem;
+     text-transform: capitalize;
+     letter-spacing: var(--mainSpacing);
+ }
+ .cart-item h5 {
+     margin: 0.5rem 0;
+     letter-spacing: var(--mainSpacing);
+ }
+ .item-amount {
+
+     position: relative;
+     top: 0.5rem;
+     text-align: center;
+
+ }
+ .remove-item {
+     color: grey;
+     cursor: pointer;
+ }
+ .fa-chevron-up,
+ .fa-chevron-down {
+     color: var(--mainBlack);
+     cursor: pointer;
+ }
+ /*---------- End of Cart Item -------------------- */
+
+ .cart-footer {
+     margin-top: 2rem;
+     letter-spacing: var(--mainSpacing);
+     text-align: center;
+ }
+ .cart-footer h3 {
+     text-transform: capitalize;
+     margin-bottom: 1rem;
+ }
+ .cart-Total{
+     margin-top: 1rem;
+     margin-bottom: 1rem;
+     text-align: center;
+     font-size: 1.5rem;
+     letter-spacing: var(--mainSpacing);
+ }
+
+ /* --------------- End of Cart ---------------- */
 
 
 

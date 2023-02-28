@@ -21,8 +21,18 @@ const cartTripContent = document.querySelector('.cart-trip-content');
 
 const flightsDOM = document.querySelector('.flights-center');
 const tripsDOM = document.querySelector('.trip-center');
+
 const checkOutFlightDOM = document.querySelector('.checkout-flight-center');
 const checkOutTripDOM = document.querySelector('.checkout-trip-center');
+
+const checkOutFlightTotal = document.querySelector('.checkout-flight-total');
+const checkOutFlightItems = document.querySelector('.checkout-flight-items');
+
+const checkOutTripTotal = document.querySelector('.checkout-trip-total');
+const checkOutTripItems = document.querySelector('.checkout-trip-items');
+
+const checkOutTotal = document.querySelector('.checkout-lumpSum-total');
+const checkOutItems = document.querySelector('.checkout-lumpSum-items');
 
 // flightCart , TripCart &  button Array
 let flightCart = [];
@@ -307,25 +317,16 @@ class UI {
         let result = '';
         tripCartItems.forEach(trip => {
             result += `
-            <div class="card" >
-                <div class="img-tag card-img-top" >
-                    <img src=${trip.image2} alt="tripCart" height="2rem" width="2rem">
-                </div>
-                <div class="card-body content-tag" >
-                    <div class="card-text">
-                        <h5>Trip: ${trip.tripTitle}</h5>
-                        <p>OverView: ${trip.overView}</p>
-                    </div>
-                </div>
-                <div class="card-footer price-tag">
-                    
-                        <p>Price: ${trip.price}</p>
-                        <p>Amount: ${trip.amount}</p>
-                    </div>
-                </div>
+            <tr class="trip-table-item">
+                <td id="#trip-td1">
+                    <img src=${trip.image} alt="flightCheckOut" height="1rem" width="1.5rem"/>
+                </td>
+                <td id="#trip-td2">${trip.tripTitle}</td>                  
+                <td id="#trip-td3">${trip.date}</td>                
+                <td id="#trip-td4">${trip.price}</td>
+                <td id="#trip-td5">${trip.amount}</td>              
                 
-            </div>
-            <br/>
+            </tr>
             `;
         });
         
@@ -423,6 +424,7 @@ class UI {
         let itemsTotal = 0;
         let tripCartTotal = 0;
         let tripItems = 0;
+        const checkoutPage = /.*page-checkout.*/;
         
         cart.map(item => {
             tempTotal += item.price * item.amount;
@@ -451,6 +453,24 @@ class UI {
             cartItems.innerText = itemsTotal;
         }
         
+        if(checkoutPage.test(window.location)){
+            if (tripCart){
+                
+                checkOutFlightTotal.innerText = parseInt(tempTotal.toFixed(2));
+                checkOutFlightItems.innerText = itemsTotal;
+                checkOutTotal.innerText = parseInt(tempTotal.toFixed(2)) + parseInt(tripCartTotal);
+                checkOutItems.innerText = itemsTotal + parseInt(tripItems);}
+            
+            else{
+                checkOutFlightTotal.innerText = parseInt(tempTotal.toFixed(2));
+                checkOutFlightItems.innerText = itemsTotal;
+                checkOutTotal.innerText = parseInt(tempTotal.toFixed(2));
+                checkOutItems.innerText = itemsTotal;
+            }
+        }
+        
+        
+        
     }
 
     setTripCartValues(cart) {
@@ -458,6 +478,7 @@ class UI {
         let itemsTotal = 0;
         let flightCartTotal = 0;
         let flightItems = 0;
+        const checkoutPage = /.*page-checkout.*/;
         
         cart.map(item => {
             tempTotal += item.price * item.amount;
@@ -483,7 +504,25 @@ class UI {
         } else {
             cartTotal.innerText = parseInt(tempTotal.toFixed(2))
             cartItems.innerText = itemsTotal;
-        }   
+        }
+
+        if(checkoutPage.test(window.location)){
+            if (flightCart){
+                
+                checkOutTripTotal.innerText = parseInt(tempTotal.toFixed(2));
+                checkOutTripItems.innerText = itemsTotal;
+                checkOutTotal.innerText = parseInt(tempTotal.toFixed(2)) + parseInt(flightCartTotal);
+                checkOutItems.innerText = itemsTotal + parseInt(flightItems);}
+            
+            else{
+                
+                checkOutTripTotal.innerText = parseInt(tempTotal.toFixed(2));
+                checkOutTripItems.innerText = itemsTotal;
+                checkOutTotal.innerText = parseInt(tempTotal.toFixed(2));
+                checkOutItems.innerText = itemsTotal;
+                
+            }
+        }
     }
 
     
@@ -623,6 +662,7 @@ class UI {
         clearCartBtn.addEventListener('click', () => {
             this.clearFlightCart();
             this.clearTripCart();
+            this.clearCheckoutList()
             
         });
         //Flight Cart functionality
@@ -720,6 +760,18 @@ class UI {
         }
         this.hideCart();
         //this.setTotalCartValues()
+    }
+    
+    clearCheckoutList(){
+        
+        while(checkOutFlightDOM.children.length > 0 ) {
+            checkOutFlightDOM.removeChild(checkOutFlightDOM.children[0]) ;
+        }
+        
+        while(checkOutTripDOM.children.length > 0 ) {
+            checkOutTripDOM.removeChild(checkOutTripDOM.children[0]) ;
+        }
+        
     }
 
     removeFlightItem(id) {
@@ -874,8 +926,8 @@ document.addEventListener("DOMContentLoaded", () => {
         //setUpGeneralApp
         
         ui.setupGeneralAPP()
-        console.log(flightCartItems);
-        console.log(tripCartItems);
+        // console.log(flightCartItems);
+        // console.log(tripCartItems);
         ui.displayFlightCheckOut(flightCartItems);
         ui.displayTripCheckOut(tripCartItems);
 

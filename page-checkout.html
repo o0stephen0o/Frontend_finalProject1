@@ -73,9 +73,11 @@
 
             <div class="row justify-content-center justify-content-md-center row-cols-12 align-items-left">
                 
-                    <div class="summary-container col-lg-6 col-md-12">
+                    <div class="summary-container col-lg-12 col-md-12">
                        
-                    <!-- start of checkoutList -->
+                        
+<!----------------------------- start of checkoutList ---------------------------------------->
+                        
                         <table class="flight-table-header" >
                             <tr class="flight-header-row">
                                 <th id="flight-th1"> </th>
@@ -96,31 +98,74 @@
             
                         </table>
                         
-                        <table class="flight-table-footer">
+                        <table class=" checkout-flight-footer">
+                            
+                            <tr>
+                                
+                            <td id="flight-foot-1">Flight Total Price & Amount</td>
+                            <td id="flight-foot-2" class="checkout-flight-total">0</td>
+                            <td id= "flight-foot-3" class="checkout-flight-items">0</td>
+                                
+                            </tr>
                             
                         </table>
                         
-                        <hr>
+                       
                         
-                        <div class=" checkout-trip-center">
+                        <hr class="s-line">
+                        
+                        <table class="trip-table-header">
+                            <tr class="trip-header-row">
+                                <th id="trip-th1"> </th>
+                                <th id="trip-th2">Trip Title</th>
+                                <th id="trip-th3">Duration</th>
+                                <th id="trip-th4">Price (USD)</th>
+                                <th id="trip-th5">Amount</th>
+                            </tr>
+                        </table>
+                        
+                        
+                        <table class=" checkout-trip-center trip-table-body">
                             
                             <!-- single trip-checkOut Item -->
                             
                             
                             <!-- end of trip-checkOut Item -->
-                        </div>
+                        </table>
+
+                        <table class="checkout-trip-footer">
+
+                            <tr>
+
+                                <td id="trip-foot-1">Trip Total Price & Amount</td>
+                                <td id="trip-foot-2" class="checkout-trip-total">0</td>
+                                <td id= "trip-foot-3" class="checkout-trip-items">0</td>
+
+                            </tr>
+
+                        </table>
+
+                        <table class="checkout-lumpSum">
+
+                            <tr>
+
+                                <td id="lumpSum-footer-1">Total Price & Amount</td>
+                                <td id="lumpSum-footer-2" class="checkout-lumpSum-total">0</td>
+                                <td id= "lumpSum-footer-3" class="checkout-lumpSum-items">0</td>
+
+                            </tr>
+
+                        </table>
                         
                     </div>
     
-            
-
-                <!-- end of checkOutList -->
+<!------------------------------- end of checkOutList -------------------------------------------->
        
   
   
 
               <!--Check form-->
-               <div class="container col-lg-6 col-md-12" id="checkform">
+               <div class="container col-lg-12 col-md-12" id="checkform">
                   <form action="https://www.google.com" method="post">
                       <div class="row">
                           <div class="col">
