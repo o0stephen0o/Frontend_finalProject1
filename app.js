@@ -303,8 +303,7 @@ class UI {
                 <td >${flight.price}  </td>
                 <td>${flight.amount} </td>              
                 
-            </tr>
-      
+            </tr>      
             `;
         });
         
@@ -534,10 +533,10 @@ class UI {
         
         <img src=${item.image} alt="flights" height="1rem" width="1.5rem">
         <div>
-            <p style="line-height: 1.5px;">Destination: ${item.destination}</p>
-            <p style="line-height: 1.5px;">Journey Date: ${item.date}  ${item.month}</p>
-            <p style="line-height: 1.5px;">Price: USD ${item.price}</p>
-            <span class="remove-item" data-id=${item.id} style="line-height: 1.5px;">remove</span>
+            <p style="line-height: 5px;">Destination: ${item.destination}</p>
+            <p style="line-height: 5px;">Journey Date: ${item.date}  ${item.month}</p>
+            <p style="line-height: 5px;">Price: USD ${item.price}</p>
+            <span class="remove-item" data-id=${item.id} style="line-height: 12px;">remove</span>
         </div>
         <div>
             <i class="fas fa-chevron-up" data-id=${item.id}></i>
@@ -554,20 +553,20 @@ class UI {
         const div = document.createElement('div');
         div.classList.add('cart-trip-item');
         div.innerHTML = `
-        <!-- start 1 of flightCart items -->
+        <!-- start 1 of TripCart items -->
         <img src=${item.image1} alt="trips" height="1rem" width="1.5rem">
         <div>
-            <p style="line-height: 1.5px;">            : ${item.tripTitle}</p>
-            <p style="line-height: 1.5px;">Journey Date: ${item.date} </p>
-            <p style="line-height: 1.5px;">Discount Price: USD ${item.price}</p>
-            <span class="remove-item" data-id=${item.id} style="line-height: 1.5px;">remove</span>
+            <p style="line-height: 5px;">Title: ${item.tripTitle}</p>
+            <p style="line-height: 5px;">Journey Date: ${item.date} </p>
+            <p style="line-height: 5px;">Discount Price: USD ${item.price}</p>
+            <span class="remove-item" data-id=${item.id} style="line-height: 12px;">remove</span>
         </div>
         <div>
             <i class="fas fa-chevron-up" data-id=${item.id}></i>
             <p class="item-amount" >${item.amount}</p>
             <i class="fas fa-chevron-down" data-id=${item.id}></i>
         </div>
-        <!-- end 1 of flightCart items -->
+        <!-- end 1 of TripCart items -->
         
         `;
         cartTripContent.appendChild(div);
@@ -586,12 +585,12 @@ class UI {
         
         this.setFlightCartValues(flightCart);
         this.setTripCartValues(tripCart);
-        
-        //this.setTotalCartValues();    
-        
+        //this.setTotalCartValues();
+
+           
         this.populateFlightCart(flightCart);
         this.populateTripCart(tripCart);
-        
+                
         cartBtn.addEventListener('click', this.showCart);
         closeCartBtn.addEventListener('click', this.hideCart);
     }
@@ -843,7 +842,7 @@ class Storage {
     static saveTripCart(tripCart) {
         localStorage.setItem("tripCart", JSON.stringify(tripCart));
     }
-    
+
     static getFlightCart() {
         return localStorage.getItem("flightCart") ?
             JSON.parse(localStorage.getItem("flightCart"))
@@ -892,6 +891,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const flightsPage = /.*page-flights.*/;
     const tripPage = /.*page-trip.*/;
     const checkoutPage = /.*page-checkout.*/;
+    const IndexPage = /.*index.*/;
+    const aboutPage = /.*page-about.*/;
 
     //setup app
     
@@ -932,24 +933,15 @@ document.addEventListener("DOMContentLoaded", () => {
         ui.displayTripCheckOut(tripCartItems);
 
         ui.cartLogic();
+     
+    }else if(IndexPage.test(window.location)){
         
-        //Retrieve data from local storage
+        ui.setupGeneralAPP()       
+        ui.cartLogic();
+    }else if(aboutPage.test(window.location)){
         
-        // storages.getFlightCart().then(flightCart => {
-        //     
-        //     ui.displayFlightCheckOut(flightCart);
-        //     
-        // }).then(() => {
-        //     
-        //     storages.getTripCart().then(tripCart => {
-        //         ui.displayTripCheckOut(tripCart);});
-        //        
-        // }).then(() => {
-        //     
-        //     ui.displayGeneralCheckOutInfo();
-        //     ui.cartLogic();
-        // });
-
+        ui.setupGeneralAPP()       
+        ui.cartLogic();
     }
 
 
