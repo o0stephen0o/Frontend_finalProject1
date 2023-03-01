@@ -14,24 +14,19 @@
     
     <!--CSS-->
     <link rel="stylesheet" href="page-about.css">
-
   
+    <!----------- favicon ----------->
+    <link rel="icon" type="image/x-icon" href="./Img/favicon-logo.jpg">
 
-    <!-- logo icon -->
-    <link rel="icon" type="image/x-icon" href="Img/favicon-logo.jpg">
-
-  
-
- 
 
     <title>About Page</title>
 
 </head>
 <body>
 
-<!--Navbar with bootstrap 4.6-->
-<nav class="navbar navbar-expand-md navbar-light">
-    <a class="navbar-brand" href="./index.html">
+  <!--Navbar with bootstrap 4.6-->
+  <nav id="fp" class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="./#fp" >
         <img src="Img/Nav/8PACE(w).png" alt="Logo">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,15 +44,17 @@
                 <a class="nav-link" href="./page-flights.html">FLIGHTS</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#homepage-contact">CONTACT</a>
+                <a class="nav-link" href="./page-contact.html">CONTACT</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#cart">CART(0)</a>
+                <a class="nav-link cart-btn" href="#cart">CART(<span class="cart-items">0</span>)</a>
             </li>
         </ul>
     </div>
 </nav>
-         
+<!--end of navbar-->
+
+
   <!-- Section 1 -->
 
 
@@ -150,62 +147,64 @@
     </div>
 </section>
 
-<!-- cart -->
+<!--------------- cart ---------------->
 <div class="cart-overlay">
     <div class="cart">
-                  <span class="close-cart">
-                      <i class="fas fa-window-close"></i>
-                  </span>
-        <h2>your cart</h2>
-        <hr>
-        <h4>Flight</h4>
+      <span class="close-cart">
+          <i class="fas fa-window-close"></i>
+      </span>
+        <h2>YOUR CART</h2>
+
+        <hr style="border-top: .1px solid whitesmoke; margin: 40px auto;">
+
+        <h3>FLIGHTS</h3>
 
         <div class="cart-flight-content">
-
+            <h6>Items ( <span class="cart-flight-items">0</span> )</h6>
         </div>
+
         <div>
 
-            <h3>Flight Sub-total : USD <span class="cart-flight-total">0</span></h3>
-            <h4> Nos. <span class="cart-flight-items">0</span></h4>
-
+            <h5>FLIGHTS SUB-TOTAL // </h5>
+            <h5>USD <span class="cart-flight-total">0</span></h5>
 
         </div>
 
+        <hr style="border-top: .1px solid whitesmoke; margin: 40px auto;">
 
-        <hr>
-
-        <h4>Trip</h4>
+        <h3>TRIP</h3>
 
         <div class="cart-trip-content">
+            <h6>Items ( <span class="cart-trip-items">0</span> )</h6>
 
         </div>
+
         <div>
 
-            <h3>Trip Sub-total : USD <span class="cart-trip-total">0</span></h3>
-            <h4> NOs. <span class="cart-trip-items">0</span></h4>
-
+            <h5>TRIP SUB-TOTAL // </h5>
+            <h5>USD <span class="cart-trip-total">0</span></h5>
 
         </div>
+
+        <hr style="border-top: .1px solid whitesmoke; margin: 40px auto;">
 
         <div class="cart-footer">
-            <h3>your total : USD <span class="cart-total">0</span></h3>
-            <button class="clear-cart banner-btn">clear cart</button>
+            <h5>TOTAL // </h5>
+            <h3>USD <span class="cart-total">0</span></h3>
+            <!-- <button class="clear-cart banner-btn btn-outline-dark">CLEAN</button> -->
+            <a href="./page-checkout.html" class="checkout-cart btn">CHECK OUT</a>
+            <a href="#" class="clear-cart btn">CLEAN</a>
 
-            <a href="./page-checkout.html">
-                <button class="check-out-cart btn">check out</button>
-            </a>
+
+
         </div>
+
     </div>
 </div>
-<!-- end of cart -->
+
+<!------------- end of cart ------------->
 
 <script src="./app.js"></script>
-
- 
-
-
-
-
 
 
 <!----------- START of footer ----------->
@@ -215,15 +214,16 @@
         <img src="./Img/Footer/8PACE(w).png" id="footer-logo" width="130" height="22" class="footer-logo" alt="logo">
     </a>
       <div class="copyright mx-auto text-center justify-content-center m-3">
-        <p class="copyright text-white" style="font-size: xx-small;"><b>SPACE</b> &copy; 2023 FINAL PROJECT</p>
+        <p class="copyright text-white" style="font-size: xx-small;"><b>8PACE</b> &copy; 2023 FINAL PROJECT</p>
       </div>
       <!-- social media container -->
       <div class="social-effect text-center justify-content-center">
           <div class="buttons mx-auto text-center">
-              <a href="#https://www.facebook.com" class="fb" title="Join us on Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-              <a href="#https://www.instagram.com" class="insta" title="Join us on Instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-              <a href="#https://www.youtube.com" class="youtube" title="Join us on YouTube"><i class="fa fa-youtube" aria-hidden="true"></i></a>
-          </div>
+              <a href="https://www.facebook.com" class="fb" title="Join us on Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+              <a href="https://www.instagram.com" class="insta" title="Join us on Instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+              <a href="https://www.youtube.com" class="youtube" title="Join us on YouTube"><i class="fa fa-youtube" aria-hidden="true"></i></a>
+              <a href="https://github.com/o0stephen0o/Frontend_finalProject1" class="github" title="Join us on github"><i class="fa fa-github" aria-hidden="true"></i></a>
+            </div>
       </div>
   </div>
 </footer>
